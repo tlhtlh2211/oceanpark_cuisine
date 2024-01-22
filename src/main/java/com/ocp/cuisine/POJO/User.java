@@ -9,6 +9,12 @@ import java.io.Serializable;
 
 @NamedQuery(name = "User.findByEmailId", query = "SELECT user FROM User user WHERE user.email =:email")
 
+@NamedQuery(name = "User.getAllUser", query = "SELECT new com.ocp.cuisine.wrapper.userWrapper(user.id, user.name, user.email, user.contactNumber, user.status) FROM User user WHERE user.role='user'")
+
+@NamedQuery(name = "User.updateStatus", query = "UPDATE User user SET user.status =: status WHERE user.id =: id")
+
+@NamedQuery(name = "User.getAllAdmin", query = "SELECT user.email FROM User user WHERE user.role='admin'")
+
 @Data
 @Entity
 @DynamicInsert
@@ -22,6 +28,9 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "studentID")
+    private String studentID;
 
     @Column(name = "name")
     private String name;
