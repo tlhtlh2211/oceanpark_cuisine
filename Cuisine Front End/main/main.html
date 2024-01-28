@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir = "ltr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="./image/cuisine.jpg">
+</head>
+<body>  
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class = "checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class = "logo">Cuisine</label>
+        <ul>
+            <li><a class = "active" href="#news">Food Review</a></li>
+            <li><a href="#news">Feedback</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li th:if="${#authentication.principal != null}" id="accountLink">
+                <a href="/account">
+                    <i class="fas fa-user"></i> Account
+                </a>
+            </li>
+            <li th:unless="${#authentication.principal != null}" id="loginLink">
+                <a href="http://127.0.0.1:3000/login/login.html">Login</a>
+            </li>
+        </ul>
+    </nav>
+    <section>
+        <h2>Welcome to the Navigation Page!</h2>
+        <p>This is a simple example with a navigation menu.</p>
+    </section>
+    <script src="main.js"></script>
+</body>
+</html>

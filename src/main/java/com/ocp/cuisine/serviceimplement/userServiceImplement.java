@@ -74,11 +74,14 @@ public class userServiceImplement implements UserService {
             );
             if (authenticate.isAuthenticated()){
                 if (customUserDetailsService.getUserDetail().getStatus().equalsIgnoreCase("true")){
-                    return new ResponseEntity<String>("{\"token:\""+"\""+
-                            jwtUtils.generateToken(customUserDetailsService.getUserDetail().getEmail(),
-                                    customUserDetailsService.getUserDetail().getRole()) + "\"}",
-                            HttpStatus.OK
-                    );
+                    if (customUserDetailsService.getUserDetail().getStatus().equalsIgnoreCase("true")) {
+                        String token = jwtUtils.generateToken(customUserDetailsService.getUserDetail().getEmail(),
+                                customUserDetailsService.getUserDetail().getRole());
+
+                        return new ResponseEntity<String>("{\"token\":\"" + token + "\"}",
+                                HttpStatus.OK
+                        );
+                    }
                 }
                 else{
                     return new ResponseEntity<String>("{\"message:\""+"\"Waiting for approval\"}",
@@ -171,7 +174,6 @@ public class userServiceImplement implements UserService {
     private boolean validateSignup(Map<String,String> requestMap){
         return requestMap.containsKey("name")
                 && requestMap.containsKey("studentID")
-                && requestMap.containsKey("contactNumber")
                 && requestMap.containsKey("email")
                 && requestMap.containsKey("password");
     }
@@ -179,7 +181,6 @@ public class userServiceImplement implements UserService {
     private User getUserFromMap(Map<String,String> requestMap){
         User user = new User();
         user.setName(requestMap.get("name"));
-        user.setContactNumber(requestMap.get("contactNumber"));
         user.setEmail(requestMap.get("email"));
         user.setPassword(requestMap.get("password"));
         user.setStudentID(requestMap.get("studentID"));

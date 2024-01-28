@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" dir = "ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="login" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class = "checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+         <label class = "logo">Cuisine</label>
+         <ul>
+                <li><a href="http://127.0.0.1:3000/main/main.html">Food Review</a></li>
+                <li><a href="#news">Feedback</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a class = "active" href="http://127.0.0.1:3000/login/login.html">Login</a></li>
+         </ul>
+    </nav>
+    <div class="container" id = "container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>Create New Account</h1>
+                <div class="social-icons">
+                    <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="social"><i class="fa-brands fa-google-plus-g"></i></a>
+                </div>
+                <span>or use your email for registration</span>
+                <input type="text" id = "name" placeholder="Name" />
+                <input type="email" id = "email" placeholder="Email" />
+                <input type="studentID" id = "studentID" placeholder="StudentID" />
+                <input type="password" id = "password" placeholder="Password" />
+                <input type="password" id = "confirmPassword" placeholder="Confirm Password" />
+                <button type="button" id="submitRegistration">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1>Sign In Your Account</h1>
+                <div class="social-icons">
+                    <a href="#" class="social"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="social"><i class="fa-brands fa-google-plus-g"></i></a>
+                </div>
+                <span>or sign in using your Email</span>
+                <input type="email" id = "email_login" placeholder="Email" />
+                <input type="password" id = "password_login" placeholder="Password" />
+                <a href="#">Forgot Your Password</a>
+                <button type="button" id="loginButton">Sign In</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="hidden" id = "login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, My VinUnian Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button class="hidden" id = "register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
