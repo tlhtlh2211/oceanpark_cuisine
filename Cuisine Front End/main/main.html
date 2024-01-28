@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" dir = "ltr" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../image/cuisine.jpg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Page</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="shortcut icon" type="image/x-icon" href="./image/cuisine.jpg">
 </head>
 <body>  
     <nav>
         <input type="checkbox" id="check">
-        <label for="check" class = "checkbtn">
+        <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <label class = "logo">Cuisine</label>
+        <label class="logo">Cuisine</label>
         <ul>
-            <li><a class = "active" href="#news">Food Review</a></li>
+            <li><a class="active" href="#news">Food Review</a></li>
             <li><a href="#news">Feedback</a></li>
             <li><a href="#about">About Us</a></li>
             <li th:if="${#authentication.principal != null}" id="accountLink">
@@ -29,10 +29,51 @@
             </li>
         </ul>
     </nav>
-    <section>
-        <h2>Welcome to the Navigation Page!</h2>
-        <p>This is a simple example with a navigation menu.</p>
-    </section>
+    <div class="container1">
+        <div class="image">
+            <img src="../image/cuisine.png" alt="Image">
+        </div>
+        <div class="text">
+            <h1>Vinhomes Ocean Park <br> Food Reviews</h1>
+            <p>Calling all hungry scholars! Welcome to Student Foodie Reviews page, your passport to the tastiest discoveries on and around campus.</p>
+            <p>Here you'll find the best places to eat, drink and be merry, as well as the latest news and reviews from the world of student food in OCP.</p>
+            <p>Join us on this delicious journey and taste the true essence of the university experience, one bite at a time. Bon appétit!</p>
+        </div>
+    </div>
+    <div class="container2">
+        <div class="food-item">
+            <img src="../image/lotteria.webp" alt="Food 1">
+            <h2>Food 1</h2>
+            <p>Description of Food 1</p>
+        </div>
+        <div class="food-item">
+            <img src="../image/pizza.jpeg" alt="Food 2">
+            <h2>Food 2</h2>
+            <p>Description of Food 2</p>
+        </div>
+        <div class="food-item">
+            <img src="../image/kfc.jpg" alt="Food 3">
+            <h2>Food 3</h2>
+            <p>Description of Food 3</p>
+        </div>
+    </div>
+    <div class="container3">
+        <div class="food-item">
+            <img src="../image/lotteria.webp" alt="Food 1">
+            <h2>Food 1</h2>
+            <p>Description of Food 1</p>
+        </div>
+        <div class="food-item">
+            <img src="../image/pizza.jpeg" alt="Food 2">
+            <h2>Food 2</h2>
+            <p>Description of Food 2</p>
+        </div>
+        <div class="food-item">
+            <img src="../image/kfc.jpg" alt="Food 3">
+            <h2>Food 3</h2>
+            <p>Description of Food 3</p>
+        </div>
+    </div>
     <script src="main.js"></script>
 </body>
 </html>
