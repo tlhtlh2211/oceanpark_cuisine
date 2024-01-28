@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>About Page</title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../image/cuisine.jpg" type="image/x-icon">
+    <meta name="login" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">Cuisine</label>
+        <ul>
+            <li><a href="/main/main.html">Food Review</a></li>
+            <li><a href="#news">Feedback</a></li>
+            <li><a class="active" href="/about/about.html">About Us</a></li>
+            <li th:if="${#authentication.principal != null}" id="accountLink">
+                <a href="/account/account.html">
+                    <i class="fas fa-user"></i> Account
+                </a>
+            </li>
+            <li th:unless="${#authentication.principal != null}" id="loginLink">
+                <a href="/login/login.html">Login</a>
+            </li>
+        </ul>
+        <div class="search">
+            <input type="text" class="search-input" placeholder="Search...">
+            <a class="search-icon" href="#">
+                <ion-icon name="search-circle-outline"></ion-icon>
+            </a>
+            <ion-icon name="close-outline"></ion-icon>
+        </div>
+    </nav>
+    <h1>About Us</h1>
+    <p>Welcome to our website!</p>
+</body>
+</html>

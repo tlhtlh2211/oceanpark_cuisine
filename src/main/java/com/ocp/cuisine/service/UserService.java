@@ -15,4 +15,5 @@ public interface UserService {
     ResponseEntity<String> checkToken();
     ResponseEntity<String> changePassWord(Map<String, String> requestMap);
     ResponseEntity<String> forgotPassWord(Map<String, String> requestMap);
+    ResponseEntity<userWrapper> getInfo();
 }

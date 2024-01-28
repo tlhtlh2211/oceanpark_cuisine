@@ -84,15 +84,15 @@ public class userServiceImplement implements UserService {
                     }
                 }
                 else{
-                    return new ResponseEntity<String>("{\"message:\""+"\"Waiting for approval\"}",
+                    return new ResponseEntity<String>("{\"message\":"+"\"Waiting for approval\"}",
                             HttpStatus.BAD_REQUEST);
                 }
             }
         } catch (Exception e){
             log.error("{}",e);
         }
-        return new ResponseEntity<String>("{\"message:\"}"+"\"Bad Credentials\"",
-                HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>("{\"message\":"+"\"Bad Credentials\"}",
+                HttpStatus.OK);
     }
 
     @Override
@@ -108,6 +108,23 @@ public class userServiceImplement implements UserService {
             e.printStackTrace();
         }
         return new ResponseEntity<List<userWrapper>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<userWrapper> getInfo() {
+        try{
+            User userObject = userDao.findByEmail(jwtFilter.getCurrentUser());
+            if (!userObject.equals(null)) {
+                return new ResponseEntity<>(userDao.getInfo(userObject.getEmail()), HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>(new userWrapper(), HttpStatus.BAD_REQUEST);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<userWrapper>(new userWrapper(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
@@ -184,7 +201,7 @@ public class userServiceImplement implements UserService {
         user.setEmail(requestMap.get("email"));
         user.setPassword(requestMap.get("password"));
         user.setStudentID(requestMap.get("studentID"));
-        user.setStatus("false");
+        user.setStatus("true");
         user.setRole("user");
         return user;
     }

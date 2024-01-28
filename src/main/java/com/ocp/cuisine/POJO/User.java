@@ -15,6 +15,8 @@ import java.io.Serializable;
 
 @NamedQuery(name = "User.getAllAdmin", query = "SELECT user.email FROM User user WHERE user.role='admin'")
 
+@NamedQuery(name = "User.getInfo", query = "SELECT new com.ocp.cuisine.wrapper.userWrapper(user.id, user.name, user.studentID, user.role, user.bio, user.email, user.status) FROM User user WHERE user.email =:email")
+
 @Data
 @Entity
 @DynamicInsert

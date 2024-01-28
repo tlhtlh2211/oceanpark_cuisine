@@ -41,13 +41,30 @@ function handleRegistration() {
     })
     .then(response => {
         if (response.ok) {
-            window.location.href = 'http://127.0.0.1:3000/main/main.html'; 
+            Swal.fire({
+                title: 'Registration Successful!',
+                text: 'Please login again to your account!',
+                icon: 'success',
+                confirmButtonText: 'Cool'
+              }).then((result) => {
+                if (result.value) {
+                    window.location.href = '/login/login.html';
+                }
+              }); 
         } else {
             console.error('Signup failed:', response.statusText);
             return response.text();
         }
     })
     .then(data => {
+        if (data === '{"Email already exists."}') {
+            Swal.fire({
+                title: 'Email already exists!',
+                text: 'Please try again!',
+                icon: 'error',
+                confirmButtonText: 'Try again'
+              }); 
+        }
         console.log('Registration successful:', data);
     })
     .catch(error => {
@@ -77,23 +94,59 @@ function handleLogin() {
         body: JSON.stringify(loginData)
     })
     .then(response => {
-        if (response.ok) {
-            var isAuthenticated = true;
-            localStorage.setItem('isAuthenticated', isAuthenticated);
-            window.location.href = 'http://127.0.0.1:3000/main/main.html';  
+        if (!response.ok) {
+          return response.text().then(text => {
+            throw new Error(text || response.statusText);
+          });
+        }
+        return response.json();
+      })
+    .then(data => {
+        if (data && data.token) {
+          setCookie('auth_token', data.token, 1);
+          console.log("Login successful, token saved in cookie");
+          Swal.fire({
+            title: 'Login Successful!',
+            text: 'Welcome to the site!',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+          }).then((result) => {
+            if (result.value) {
+              window.location.href = '/main/main.html';
+            }
+          });
         } else {
-            console.error('Signup failed:', response.statusText);
-            return response.text(); 
+          throw new Error('Email or password is incorrect');
         }
     })
-    .then(errorData => {
-        console.error('Error from server:', errorData);
-    })
     .catch(error => {
-        console.error('Fetch error:', error);
+        console.error('Error:', error.message);
+        let errorMessage = error.message;
+        try {
+          const errorData = JSON.parse(errorMessage);
+          errorMessage = errorData.message;
+        } catch (e) {}
+      
+        Swal.fire({
+          title: 'Error',
+          text: errorMessage,
+          icon: 'error',
+          confirmButtonText: 'Try again'
+        });
     });
 }
 
 const loginButton = document.getElementById('loginButton');
 loginButton.addEventListener('click', handleLogin);
 
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+  

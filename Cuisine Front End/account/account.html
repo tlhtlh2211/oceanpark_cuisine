@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta charset="UTF-8">
+    <link rel="shortcut icon" href="../image/cuisine.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>Account Page</title>
 </head>
 <body>
+    <nav>
+        <input type="checkbox" id="check">
+        <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+        <label class="logo">Cuisine</label>
+        <ul>
+            <li><a href="/main/main.html">Food Review</a></li>
+            <li><a href="#news">Feedback</a></li>
+            <li><a href="/about/about.html">About Us</a></li>
+            <li th:if="${#authentication.principal != null}" id="accountLink">
+                <a class="active" href="/account/account.html">
+                    <i class="fas fa-user"></i> Account
+                </a>
+            </li>
+            <li th:unless="${#authentication.principal != null}" id="loginLink">
+                <a href="/login/login.html">Login</a>
+            </li>
+        </ul>
+        <div class="search">
+            <input type="text" class="search-input" placeholder="Search...">
+            <a class="search-icon" href="#">
+                <ion-icon name="search-circle-outline"></ion-icon>
+            </a>
+            <ion-icon name="close-outline"></ion-icon>
+        </div>
+    </nav>
     <h1>Welcome to your Account</h1>
-    <div>
-        <p>Username: <span id="username"></span></p>
-        <p>Email: <span id="email"></span></p>
-        <h2>User Information</h2>
-        <input type="file" id="profile-picture" accept="image/*">
-    </div>
-</body>
-</html>
-        <h2>User Information</h2>
-        <p>Username: <span id="username"></span></p>
-        <p>Email: <span id="email"></span></p>
-    </div>
+    <div class="container" id = "container">
+        <div class="image">
+            <img src="../image/avatar.png" alt="Image">
+        </div>
+        <div class="form-container personal-info">
+            <h1>Personal Information</h1>
+            <h3>Name: <span id="name"></span></h3>
+            <h3>Email: <span id="email"></span></h3>
+            <h3>Student ID: <span id="studentID"></span></h3>
+            <h3>Role: <span id="role"></span></h3>
+            <h3>Bio:</h3>
+            <textarea id="bio" rows="4" cols="50" placeholder="Write your bio here....!"></textarea>
+            <button type="button" id="editPersonalInfo">Edit</button>
+        </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

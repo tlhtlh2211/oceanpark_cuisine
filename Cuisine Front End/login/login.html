@@ -2,6 +2,7 @@
 <html lang="en" dir = "ltr">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../image/cuisine.jpg" type="image/x-icon">
     <meta name="login" content="width = device-width, initial-scale = 1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -10,16 +11,25 @@
 <body>
     <nav>
         <input type="checkbox" id="check">
-        <label for="check" class = "checkbtn">
+        <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-         <label class = "logo">Cuisine</label>
-         <ul>
-                <li><a href="http://127.0.0.1:3000/main/main.html">Food Review</a></li>
-                <li><a href="#news">Feedback</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a class = "active" href="http://127.0.0.1:3000/login/login.html">Login</a></li>
-         </ul>
+        <label class="logo">Cuisine</label>
+        <ul>
+            <li><a href="/main/main.html">Food Review</a></li>
+            <li><a href="#news">Feedback</a></li>
+            <li><a href="/about/about.html">About Us</a></li>
+            <li id="loginLink">
+                <a class="active" href="/login/login.html">Login</a>
+            </li>
+        </ul>
+        <div class="search">
+            <input type="text" class="search-input" placeholder="Search...">
+            <a class="search-icon" href="#">
+                <ion-icon name="search-circle-outline"></ion-icon>
+            </a>
+            <ion-icon name="close-outline"></ion-icon>
+        </div>
     </nav>
     <div class="container" id = "container">
         <div class="form-container sign-up">
@@ -68,5 +78,8 @@
         </div>
     </div>
     <script src="login.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

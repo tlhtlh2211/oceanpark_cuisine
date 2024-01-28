@@ -87,4 +87,14 @@ public class UserRestImplement implements UserRest {
         }
         return CuisineUtils.getResponseEntity(CuisineConstants.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<userWrapper> getInfo() {
+        try{
+            return userService.getInfo();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<userWrapper>(new userWrapper(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

@@ -32,4 +32,7 @@ public interface UserRest {
 
     @PostMapping(path = "/forgotPassWord")
     public ResponseEntity<String> forgotPassWord(@RequestBody(required = true) Map<String, String> requestMap);
+
+    @GetMapping(path = "/getInfo")
+    public ResponseEntity<userWrapper> getInfo();
 }
