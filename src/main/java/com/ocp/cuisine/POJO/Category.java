@@ -9,6 +9,10 @@ import java.io.Serializable;
 
 @NamedQuery(name = "Category.getAllCategory", query = "SELECT category FROM Category category WHERE category.id IN (SELECT product.category.id FROM Product product WHERE product.status = 'true')")
 
+@NamedQuery(name = "Category.getAllOnlineCategory", query = "SELECT category FROM Category category WHERE category.status = 'online'")
+
+@NamedQuery(name = "Category.getAllOfflineCategory", query = "SELECT category FROM Category category WHERE category.status = 'offline'")
+
 @Data
 @Entity
 @DynamicUpdate
@@ -26,4 +30,10 @@ public class Category implements Serializable {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "category")
+    private String category;
 }
+

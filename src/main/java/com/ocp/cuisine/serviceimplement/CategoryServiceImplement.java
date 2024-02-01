@@ -84,8 +84,49 @@ public class CategoryServiceImplement implements CategoryService {
         return CuisineUtils.getResponseEntity(CuisineConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<List<Category>> getAllOnlineCategory() {
+        try{
+            log.info("Inside get");
+            return new ResponseEntity<List<Category>>(categoryDao.getAllOnlineCategory(),HttpStatus.OK);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<List<Category>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<List<Category>> getAllOfflineCategory() {
+        try{
+            log.info("Inside get");
+            return new ResponseEntity<List<Category>>(categoryDao.getAllOfflineCategory(),HttpStatus.OK);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<List<Category>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> deleteCategoryById(Integer id) {
+        try{
+            log.info("Inside delete");
+            if (jwtFilter.isAdmin()){
+                Optional optional = categoryDao.findById(id);
+                if (!optional.isEmpty()){
+                    categoryDao.deleteById(id);
+                    return CuisineUtils.getResponseEntity(CuisineConstants.CATEGORY_DELETED, HttpStatus.OK);
+                }
+                else return CuisineUtils.getResponseEntity(CuisineConstants.CATEGORY_NOT_EXIST, HttpStatus.OK);
+            }
+            else return CuisineUtils.getResponseEntity(CuisineConstants.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return CuisineUtils.getResponseEntity(CuisineConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     private boolean validateCategoryMap(Map<String, String> requestMap, boolean validateId) {
-        if (requestMap.containsKey("name")){
+        if (requestMap.containsKey("name") && requestMap.containsKey("status") && requestMap.containsKey("category")){
             if (requestMap.containsKey("id") && validateId){
                 return true;
             }
@@ -100,6 +141,8 @@ public class CategoryServiceImplement implements CategoryService {
             category.setId(Integer.parseInt(requestMap.get("id")));
         }
         category.setName(requestMap.get("name"));
+        category.setStatus(requestMap.get("status"));
+        category.setCategory(requestMap.get("category"));
         return category;
     }
 }

@@ -48,4 +48,35 @@ public class CategoryRestImplement implements CategoryRest {
         }
         return CuisineUtils.getResponseEntity(CuisineConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @Override
+    public ResponseEntity<List<Category>> getAllOnlineCategory() {
+        try{
+            return categoryService.getAllOnlineCategory();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<List<Category>> getAllOfflineCategory() {
+        try{
+            return categoryService.getAllOfflineCategory();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<String> deleteCategoryById(Integer id) {
+        try{
+            return categoryService.deleteCategoryById(id);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return CuisineUtils.getResponseEntity(CuisineConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

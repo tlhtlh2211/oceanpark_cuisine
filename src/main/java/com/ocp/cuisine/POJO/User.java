@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @NamedQuery(name = "User.findByEmailId", query = "SELECT user FROM User user WHERE user.email =:email")
 
-@NamedQuery(name = "User.getAllUser", query = "SELECT new com.ocp.cuisine.wrapper.userWrapper(user.id, user.name, user.email, user.status) FROM User user WHERE user.role='user'")
+@NamedQuery(name = "User.getAllUser", query = "SELECT new com.ocp.cuisine.wrapper.userWrapper(user.id, user.name, user.studentID, user.role, user.bio, user.email, user.status) FROM User user WHERE user.role='user'")
 
 @NamedQuery(name = "User.updateStatus", query = "UPDATE User user SET user.status =: status WHERE user.id =: id")
 

@@ -19,13 +19,18 @@
             <li><a href="/main/main.html">Food Review</a></li>
             <li><a href="#news">Feedback</a></li>
             <li><a class="active" href="/about/about.html">About Us</a></li>
-            <li th:if="${#authentication.principal != null}" id="accountLink">
+            <li id="accountLink" style="display:none;">
                 <a href="/account/account.html">
-                    <i class="fas fa-user"></i> Account
+                    <i class="fas fa-user"></i>
                 </a>
             </li>
-            <li th:unless="${#authentication.principal != null}" id="loginLink">
+            <li id="loginLink" style="display:block;">
                 <a href="/login/login.html">Login</a>
+            </li>
+            <li id="logOut" style ="display:none;">
+                <a href="/main/main.html">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </a>
             </li>
         </ul>
         <div class="search">
@@ -33,10 +38,14 @@
             <a class="search-icon" href="#">
                 <ion-icon name="search-circle-outline"></ion-icon>
             </a>
-            <ion-icon name="close-outline"></ion-icon>
+            <a class ="delete-icon">
+                <ion-icon name="close-outline"></ion-icon>
+            </a>
         </div>
     </nav>
-    <h1>About Us</h1>
-    <p>Welcome to our website!</p>
+    <script src="about.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

@@ -20,8 +20,43 @@ function handleRegistration() {
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
 
+    if (name === '' || email === '' || studentID === '' || password === '' || confirmPassword === ''){
+       Swal.fire({
+        title: 'Something went wrong!',
+        text: 'Please try again!',
+        icon: 'error',
+        confirmButtonText: 'Try again'
+        }); 
+        return;
+    }
+
+    if (!email.includes('@') || !email.includes('.')) {
+      Swal.fire({
+      title: 'Wrong email format!',
+      text: 'Please try again!',
+      icon: 'error',
+      confirmButtonText: 'Try again'
+      }); 
+      return;
+    }
+
+    if (!studentID.includes('V') || (studentID.length !== 10)) {
+      Swal.fire({
+      title: 'Wrong student ID format!',
+      text: 'Please try again!',
+      icon: 'error',
+      confirmButtonText: 'Try again'
+      }); 
+      return;
+    }
+
     if (password !== confirmPassword) {
-        alert('Passwords do not match');
+      Swal.fire({
+        title: 'Password does not match!',
+        text: 'Please try again!',
+        icon: 'error',
+        confirmButtonText: 'Try again'
+        }); 
         return;
     }
 
@@ -140,13 +175,14 @@ const loginButton = document.getElementById('loginButton');
 loginButton.addEventListener('click', handleLogin);
 
 function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
+  var expires = "";
+  if (days) {
       var date = new Date();
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
       expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+  }
+  document.cookie = name + "=" + (value || "") + expires + "; path=/; Secure";
 }
+
 
   

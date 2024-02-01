@@ -11,10 +11,14 @@ import java.util.Map;
 public interface CategoryRest {
     @PostMapping(path = "/add")
     public ResponseEntity<String> addNewCategory(@RequestBody(required = true) Map<String, String> requestMap);
-
     @GetMapping(path = "/get")
     public ResponseEntity<List<Category>> getAllCategory(@RequestParam(required = false) String filterValue);
-
     @PostMapping(path = "/update")
     public ResponseEntity<String> updateCategory(@RequestBody(required = true) Map<String, String> requestMap);
+    @GetMapping(path = "/getOnline")
+    public ResponseEntity<List<Category>> getAllOnlineCategory();
+    @GetMapping(path = "/getOffline")
+    public ResponseEntity<List<Category>> getAllOfflineCategory();
+    @PostMapping(path = "/delete/{id}")
+    public ResponseEntity<String> deleteCategoryById(@PathVariable Integer id);
 }

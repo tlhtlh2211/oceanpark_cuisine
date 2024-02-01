@@ -1,3 +1,5 @@
+var auth_token = getCookie('auth_token');
+
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -9,10 +11,9 @@ function getCookie(name) {
     return null;
 }
 
-var auth_token = getCookie('auth_token');
-
 document.addEventListener("DOMContentLoaded", function() {
     if (auth_token) {
+        getCategories(auth_token);
         console.log("Token found: ", auth_token)
         document.getElementById("loginLink").style.display = 'none';
         document.getElementById("accountLink").style.display = 'block'; 
@@ -27,6 +28,43 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function deleteCookie(name) {
     document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+
+function getCategories(token) {
+    fetch('http://localhost:3000/category/getOnline', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token, 
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        const table = document.getElementById('productTable');
+
+        while (table.rows.length > 1) {
+            table.deleteRow(1);
+        }
+
+        data.forEach(category => {
+            console.log(category);
+            const row = table.insertRow();
+            const idCell = row.insertCell(0);
+            const nameCell = row.insertCell(1);
+            const statusCell = row.insertCell(2);
+
+            idCell.textContent = category.id; 
+            nameCell.textContent = category.name;
+            statusCell.textContent = category.status;
+        });
+    })
+    .catch(error => console.error('Error fetching data:', error));
 }
 
 document.getElementById('logOut').addEventListener('click', function() {
@@ -46,8 +84,4 @@ document.getElementById('logOut').addEventListener('click', function() {
             window.location.href = '/login/login.html';
         }
     });
-});
-
-Online.addEventListener('click', () => {
-    window.location.href = '/onlinefood/onlinefood.html';
 });
