@@ -75,7 +75,7 @@ function deleteCookie(name) {
 
 
 function getCategories(token) {
-    fetch('http://localhost:3000/category/getOnline', {
+    fetch('http://localhost:3000/category/getOffline', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + token, 
@@ -103,15 +103,15 @@ function getCategories(token) {
             const Cell = row.insertCell(0);
             const nameCell = row.insertCell(1);
             const CategoryCell = row.insertCell(2);
-            const OpenCell = row.insertCell(3);
-            const CloseCell = row.insertCell(4);
+            const statusCell = row.insertCell(3);
+            const idCell = row.insertCell(4);
 
             Cell.textContent = i; 
             CategoryCell.textContent = category.category;
+            idCell.textContent = category.id;
             nameCell.textContent = category.name;
             nameCell.innerHTML = `<a href="/product/product.html?shopId=${category.id}">${category.name}</a>`;
-            OpenCell.textContent = category.openTime || 'N/A';
-            CloseCell.textContent = category.closeTime || 'N/A';
+            statusCell.textContent = category.status;
         });
     })
     .catch(error => console.error('Error fetching data:', error));
@@ -147,8 +147,8 @@ function addNewEntry(token) {
             '<input id="swal-input1" class="swal2-input" placeholder="Shop Name">' +
             '<input id="swal-input2" class="swal2-input" placeholder="Category (What do they sell?)">'+
             '<select id="swal-input3" class="swal2-input">' +
-                '<option value="online">online (Shipping option)</option>' +
                 '<option value="offline">offline (In store)</option>' +
+                '<option value="online">online (Shipping option)</option>' + 
             '</select>',
         focusConfirm: false,
         preConfirm: () => {
@@ -208,7 +208,7 @@ function addNewEntry(token) {
                     icon: 'success',
                     confirmButtonText: 'Cool'
                 }).then((result) => {
-                    window.location.href = '/onlinefood/onlinefood.html';
+                    window.location.href = '/offlinefood/offlinefood.html';
                 });
             })
             .catch(error => {

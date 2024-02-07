@@ -4,6 +4,8 @@ public class CuisineConstants {
 
     public static final String UPDATE_SUCCESS = "Update Successfully";
     public static final String CATEGORY_DELETED = "Category deleted successfully";
+    public static final String REVIEW_ADDED = "Review added successfully";
+    public static final String REVIEW_NOT_EXIST = "Review does not exist";
     public static String SOMETHING_WENT_WRONG = "Something went wrong.";
     public static final String INVALID_DATA = "Invalid.";
     public static final String EXISTS_EMAIL = "Email already exists.";

@@ -257,8 +257,8 @@ th:nth-child(5) { width: 10%; }
 
 .add-btn {
     cursor: pointer;
-    padding: 4px 5px;
-    margin-left: 5px;
+    padding: 3px 6px;
+    margin-left: 8px;
     color: #ffffff;
     background-color: #4698f5;
     font-size: 19px;
@@ -271,6 +271,20 @@ th:nth-child(5) { width: 10%; }
     transition: .5s;
     color: #ffffff;
     border-radius: 3px;
+}
+
+.swal2-textarea {
+    height: 200px;
+}
+
+.swal2-modal {
+    width: 60% !important; 
+}
+
+.custom-swal-label{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left;
 }
 
 footer {

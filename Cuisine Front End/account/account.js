@@ -10,12 +10,33 @@ function getCookie(name) {
 }
 
 var auth_token = getCookie('auth_token');
-if (auth_token) {
-    console.log("Token found: ", auth_token);
-    getUserInfo(auth_token);
-} else {
-    console.log("No token found");
-}
+
+document.addEventListener("DOMContentLoaded", function() {
+    checkToken(auth_token).then(isValidToken => {
+        console.log(isValidToken);
+        if (isValidToken) {
+            console.log("Token found: ", auth_token)
+            getUserInfo(auth_token);
+        } else {
+            console.log("No token found");
+            Swal.fire({
+                title: 'Login Required',
+                text: 'Your login has been expired!!',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log in!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/login/login.html';
+                }
+            });
+        }
+    }).catch(error => {
+        console.error('Error during token validation:', error);
+    });
+});
 
 function getUserInfo(token) {
     fetch('http://localhost:3000/user/getInfo', {
@@ -41,6 +62,32 @@ function getUserInfo(token) {
     })
     .catch(error => {
         console.error('Error fetching user info:', error);
+    });
+}
+
+function checkToken(auth_token) {
+    if (auth_token === null) return Promise.resolve(false);
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:3000/user/checkToken', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + auth_token,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            resolve(data.message === "True");
+        })
+        .catch(error => {
+            console.error('Error checking token:', error);
+            reject(error);
+        });
     });
 }
 

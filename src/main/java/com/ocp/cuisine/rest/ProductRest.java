@@ -1,5 +1,6 @@
 package com.ocp.cuisine.rest;
 
+import com.ocp.cuisine.POJO.Product;
 import com.ocp.cuisine.wrapper.ProductWrapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,8 @@ public interface ProductRest {
     public ResponseEntity<String> updateStatus(@RequestBody Map<String, String> requestMap);
     @GetMapping(path = "/getProductByCategoryId/{id}")
     public ResponseEntity<List<ProductWrapper>> getProductByCategoryId(@PathVariable Integer id);
-    @GetMapping(path = "getProductById/{id}")
+    @GetMapping(path = "/getProductById/{id}")
     public ResponseEntity<ProductWrapper> getProductById(@PathVariable Integer id);
+    @GetMapping("search")
+    public ResponseEntity<List<ProductWrapper>> searchProducts(@RequestParam("query") String query);
 }

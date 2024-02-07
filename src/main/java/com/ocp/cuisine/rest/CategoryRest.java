@@ -21,4 +21,6 @@ public interface CategoryRest {
     public ResponseEntity<List<Category>> getAllOfflineCategory();
     @PostMapping(path = "/delete/{id}")
     public ResponseEntity<String> deleteCategoryById(@PathVariable Integer id);
+    @GetMapping(path = "/getCategoryById/{id}")
+    public ResponseEntity<Category> getCategoryById(@PathVariable Integer id);
 }

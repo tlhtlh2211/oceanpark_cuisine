@@ -13,4 +13,5 @@ public interface CategoryService {
     ResponseEntity<List<Category>> getAllOnlineCategory();
     ResponseEntity<List<Category>> getAllOfflineCategory();
     ResponseEntity<String> deleteCategoryById(Integer id);
+    ResponseEntity<Category> getCategoryById(Integer id);
 }

@@ -79,4 +79,14 @@ public class CategoryRestImplement implements CategoryRest {
         return CuisineUtils.getResponseEntity(CuisineConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<Category> getCategoryById(Integer id) {
+        try{
+            return categoryService.getCategoryById(id);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new Category(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

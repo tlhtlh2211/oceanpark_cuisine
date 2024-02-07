@@ -1,6 +1,7 @@
 package com.ocp.cuisine.restimplement;
 
 import com.ocp.cuisine.POJO.Category;
+import com.ocp.cuisine.POJO.Product;
 import com.ocp.cuisine.constant.CuisineConstants;
 import com.ocp.cuisine.rest.CategoryRest;
 import com.ocp.cuisine.rest.ProductRest;
@@ -89,5 +90,15 @@ public class ProductRestImplement implements ProductRest {
             e.printStackTrace();
         }
         return new ResponseEntity<ProductWrapper>(new ProductWrapper(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @Override
+    public ResponseEntity<List<ProductWrapper>> searchProducts(String query) {
+        try{
+            return  productService.searchProducts(query);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

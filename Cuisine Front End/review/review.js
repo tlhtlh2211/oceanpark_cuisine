@@ -1,3 +1,8 @@
+var auth_token = getCookie('auth_token');
+
+const params = new URLSearchParams(window.location.search);
+const productId = params.get('productId');
+
 function getCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -9,13 +14,12 @@ function getCookie(name) {
     return null;
 }
 
-var auth_token = getCookie('auth_token');
-
 document.addEventListener("DOMContentLoaded", function() {
     checkToken(auth_token).then(isValidToken => {
         console.log(isValidToken);
         if (isValidToken) {
             console.log("Token found: ", auth_token)
+            getReviews(auth_token, productId);
             document.getElementById("loginLink").style.display = 'none';
             document.getElementById("accountLink").style.display = 'block'; 
             document.getElementById("logOut").style.display = 'block';
@@ -69,7 +73,6 @@ function checkToken(auth_token) {
     });
 }
 
-
 function deleteCookie(name) {
     document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
@@ -87,50 +90,29 @@ document.getElementById('logOut').addEventListener('click', function() {
         confirmButtonText: 'Yes, log out!'
     }).then((result) => {
         if (result.isConfirmed) {
+
             deleteCookie('auth_token');
             window.location.href = '/login/login.html';
         }
     });
 });
 
-Online.addEventListener('click', () => {
-    if (auth_token){
-        window.location.href = '/onlinefood/onlinefood.html';
-    }
-    else{
-        Swal.fire({
-            title: 'Login Required',
-            text: 'You need to login first',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, log in!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = '/login/login.html';
-            }
-        });
-    }
-});
-
-Offline.addEventListener('click', () => {
-    if (auth_token){
-        window.location.href = '/offlinefood/offlinefood.html';
-    }
-    else{
-        Swal.fire({
-            title: 'Login Required',
-            text: 'You need to login first',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, log in!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = '/login/login.html';
-            }
-        });
-    }
-});   
+function getReviews(token, productId) {
+    fetch('http://localhost:3000/review/getReviewByProductId/' + productId, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token, 
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Reviews:', data);
+    })
+    .catch(error => console.error('Error fetching data:', error));
+}

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="../image/cuisine.jpg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Food</title>
+    <title>Shop Details</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>  
@@ -44,15 +45,21 @@
         </div>
     </nav>
     <div class="container">
-        <table id="productTable">
-            <caption>Online Shipping Information <button id="addName" class="add-btn">+</button></caption>
+        <table id="foodTable">
+            <caption id="tableCaption"></caption>
+            <div id="contactNumber">
+                <strong>Contact Number:</strong> <span>+123456789</span>
+            </div>
+            <div id="socialMediaLink">
+                <strong>Social Media:</strong> <a href="https://www.example.com" target="_blank">Facebook</a>
+            </div>
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Open Time</th>
-                    <th scope="col">Close Time</th>
+                    <th scope="col">Food Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price (.000 VND)</th>
+                    <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -87,9 +94,8 @@
           &copy; | Designed by tlhtlh
         </div>
     </footer>
-    <script src="onlinefood.js"></script>
+    <script src="product.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
 </html>

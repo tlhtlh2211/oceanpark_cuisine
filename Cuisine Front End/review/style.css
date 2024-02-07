@@ -219,59 +219,12 @@ label.logo{
     border-radius: 30px;
     margin-bottom: 30px;
     position: relative;
-    min-height: 800px;
-    max-height: 1000px;
+    min-height: 1000px;
+    max-height: 1500px;
     margin-top: 75px;
     overflow-y: auto;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    align-content: center;
-}
-
-caption {
-    font-size: 30px;
-    font-weight: bold;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: #004ea6;
-}
-
-th, td {
-    border: 1px solid #000000;
-    padding: 8px;
-    text-align: left;
-    color: black;
-}
-th {
-    background-color: #a1d2f5;
-}
-
-th:nth-child(1) { width: 10%; } 
-th:nth-child(2) { width: 30%; } 
-th:nth-child(3) { width: 40%; }
-th:nth-child(4) { width: 10%; } 
-th:nth-child(5) { width: 10%; }
-
-.add-btn {
-    cursor: pointer;
-    padding: 4px 5px;
-    margin-left: 5px;
-    color: #ffffff;
-    background-color: #4698f5;
-    font-size: 19px;
-    border-color: #54a0f7;
-    border-radius: 4px;
-}
-
-.add-btn:hover, .add-btn:active{
-    background-color: #004ca3;
-    transition: .5s;
-    color: #ffffff;
-    border-radius: 3px;
-}
 
 footer {
     margin-top: 50px;

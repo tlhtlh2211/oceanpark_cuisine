@@ -137,6 +137,16 @@ public class ProductServiceImplement implements ProductService {
         return new ResponseEntity<ProductWrapper>(new ProductWrapper(), HttpStatus.BAD_REQUEST);
     }
 
+    @Override
+    public ResponseEntity<List<ProductWrapper>> searchProducts(String query) {
+        try{
+            return new ResponseEntity<>(productDao.searchProducts(query), HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private Product getProductFromMap(Map<String, String> requestMap, boolean isAdd) {
         Category category = new Category();
         category.setId(Integer.parseInt(requestMap.get("categoryId")));

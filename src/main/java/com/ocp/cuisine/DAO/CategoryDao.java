@@ -9,4 +9,5 @@ public interface CategoryDao extends JpaRepository<Category, Integer> {
     List<Category> getAllCategory();
     List<Category> getAllOnlineCategory();
     List<Category> getAllOfflineCategory();
+    Category getCategoryById(Integer id);
 }

@@ -1,5 +1,6 @@
 package com.ocp.cuisine.service;
 
+import com.ocp.cuisine.POJO.Product;
 import com.ocp.cuisine.wrapper.ProductWrapper;
 import org.springframework.http.ResponseEntity;
 
@@ -14,4 +15,5 @@ public interface ProductService {
     ResponseEntity<String> updateStatus(Map<String, String> requestMap);
     ResponseEntity<List<ProductWrapper>> getProductByCategoryId(Integer id);
     ResponseEntity<ProductWrapper> getProductById(Integer id);
+    ResponseEntity<List<ProductWrapper>> searchProducts(String query);
 }

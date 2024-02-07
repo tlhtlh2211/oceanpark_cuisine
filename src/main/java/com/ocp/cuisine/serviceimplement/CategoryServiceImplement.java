@@ -7,12 +7,15 @@ import com.ocp.cuisine.POJO.Category;
 import com.ocp.cuisine.constant.CuisineConstants;
 import com.ocp.cuisine.service.CategoryService;
 import com.ocp.cuisine.util.CuisineUtils;
+import com.ocp.cuisine.wrapper.ProductWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -125,8 +128,24 @@ public class CategoryServiceImplement implements CategoryService {
         return CuisineUtils.getResponseEntity(CuisineConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @Override
+    public ResponseEntity<Category> getCategoryById(Integer id) {
+        try{
+            return new ResponseEntity<>(categoryDao.getCategoryById(id),HttpStatus.OK);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new Category(), HttpStatus.BAD_REQUEST);
+    }
+
     private boolean validateCategoryMap(Map<String, String> requestMap, boolean validateId) {
-        if (requestMap.containsKey("name") && requestMap.containsKey("status") && requestMap.containsKey("category")){
+        if (requestMap.containsKey("name") &&
+                requestMap.containsKey("status") &&
+                requestMap.containsKey("category") &&
+                requestMap.containsKey("openTime") &&
+                requestMap.containsKey("closeTime") &&
+                (requestMap.containsKey("socialMediaLink") || requestMap.containsKey("contactNumber"))
+        ){
             if (requestMap.containsKey("id") && validateId){
                 return true;
             }
@@ -143,6 +162,11 @@ public class CategoryServiceImplement implements CategoryService {
         category.setName(requestMap.get("name"));
         category.setStatus(requestMap.get("status"));
         category.setCategory(requestMap.get("category"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:m");
+        category.setOpenTime(LocalTime.parse(requestMap.get("openTime"), formatter));
+        category.setCloseTime(LocalTime.parse(requestMap.get("closeTime"), formatter));
+        category.setContactNumber(requestMap.get("contactNumber"));
+        category.setSocialMediaLink(requestMap.get("socialMediaLink"));
         return category;
     }
 }

@@ -2,9 +2,6 @@ const register = document.getElementById('register');
 const container = document.getElementById('container');
 const login = document.getElementById('login');
 
-var isAuthenticated = false;
-localStorage.setItem('isAuthenticated', isAuthenticated);
-
 register.addEventListener('click', () => {
     container.classList.add("active");
 });
